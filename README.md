@@ -8,6 +8,12 @@
 - Java 21+
 - Gradlew из проекта
 
+Клонирование репозитория локально:
+
+```bash
+git clone https://github.com/TheDenFire/library-tracker-cli.git
+```
+
 Команда запуска:
 
 ```bash
