@@ -13,6 +13,10 @@
 ```bash
 git clone https://github.com/TheDenFire/library-tracker-cli.git
 ```
+Переходим в нужный каталог:
+```bash
+cd library-tracker-cli/
+```
 
 Команда запуска:
 
