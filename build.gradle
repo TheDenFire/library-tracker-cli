@@ -25,6 +25,10 @@ application {
     mainClass = 'ru.thedenfire.Main'
 }
 
+run {
+    standardInput = System.in
+}
+
 test {
     useJUnitPlatform()
 }
