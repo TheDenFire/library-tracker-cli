@@ -55,8 +55,8 @@ class LibraryServiceTest {
         assertEquals(4, stats.totalBooks());
         assertEquals("Book B", stats.oldestBook().title());
         assertEquals("Book C", stats.newestBook().title());
-        assertEquals("Author 1", stats.topAuthors().get(0).author());
-        assertEquals(2L, stats.topAuthors().get(0).count());
+        assertEquals("Author 1", stats.topAuthors().getFirst().author());
+        assertEquals(2L, stats.topAuthors().getFirst().count());
     }
 
     @Test
@@ -67,8 +67,8 @@ class LibraryServiceTest {
 
         LibraryStatsResponse stats = libraryService.getStats();
 
-        assertEquals("Author 1", stats.topAuthors().get(0).author());
-        assertEquals(2L, stats.topAuthors().get(0).count());
+        assertEquals("Author 1", stats.topAuthors().getFirst().author());
+        assertEquals(2L, stats.topAuthors().getFirst().count());
     }
 
     @Test

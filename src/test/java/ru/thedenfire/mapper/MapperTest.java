@@ -9,7 +9,6 @@ import ru.thedenfire.dto.response.BookResponse;
 import ru.thedenfire.dto.response.LibraryStatsResponse;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -41,8 +40,8 @@ class MapperTest {
         Book newestBook = new Book("cs", "vav", 2008);
         LibraryStats stats = new LibraryStats(
                 2,
-                Optional.of(oldestBook),
-                Optional.of(newestBook),
+                oldestBook,
+                newestBook,
                 List.of(new AuthorStat("vav", 1))
         );
         BookMapper bookMapper = new BookMapper();
@@ -53,13 +52,13 @@ class MapperTest {
         assertEquals(2, response.totalBooks());
         assertEquals(oldestBook.getId(), response.oldestBook().id());
         assertEquals(newestBook.getId(), response.newestBook().id());
-        assertEquals("vav", response.topAuthors().get(0).author());
-        assertEquals(1, response.topAuthors().get(0).count());
+        assertEquals("vav", response.topAuthors().getFirst().author());
+        assertEquals(1, response.topAuthors().getFirst().count());
     }
 
     @Test
     void shouldMapMissingBooksToNullInStatsResponse() {
-        LibraryStats stats = new LibraryStats(0, Optional.empty(), Optional.empty(), List.of());
+        LibraryStats stats = new LibraryStats(0, null, null, List.of());
         LibraryStatsMapper mapper = new LibraryStatsMapper(new BookMapper(), new AuthorStatMapper());
 
         LibraryStatsResponse response = mapper.toResponse(stats);

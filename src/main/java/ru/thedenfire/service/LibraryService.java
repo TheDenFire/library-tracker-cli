@@ -72,13 +72,18 @@ public class LibraryService {
                 .collect(Collectors.groupingBy(book -> normalize(book.getAuthor())))
                 .values()
                 .stream()
-                .map(authorBooks -> new AuthorStat(authorBooks.get(0).getAuthor(), authorBooks.size()))
+                .map(authorBooks -> new AuthorStat(authorBooks.getFirst().getAuthor(), authorBooks.size()))
                 .sorted(Comparator.comparingLong(AuthorStat::getCount).reversed()
                         .thenComparing(AuthorStat::getAuthor, String.CASE_INSENSITIVE_ORDER))
                 .limit(3)
                 .toList();
 
-        LibraryStats stats = new LibraryStats(books.size(), bookRepository.findOldest(), bookRepository.findNewest(), topAuthors);
+        LibraryStats stats = new LibraryStats(
+                books.size(),
+                bookRepository.findOldest().orElse(null),
+                bookRepository.findNewest().orElse(null),
+                topAuthors
+        );
         return libraryStatsMapper.toResponse(stats);
     }
 

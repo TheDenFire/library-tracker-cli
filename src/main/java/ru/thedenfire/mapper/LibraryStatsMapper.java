@@ -12,8 +12,8 @@ public class LibraryStatsMapper {
     public LibraryStatsResponse toResponse(LibraryStats stats) {
         return new LibraryStatsResponse(
                 stats.getTotalBooks(),
-                stats.getOldestBook().map(bookMapper::toResponse).orElse(null),
-                stats.getNewestBook().map(bookMapper::toResponse).orElse(null),
+                stats.getOldestBook() == null ? null : bookMapper.toResponse(stats.getOldestBook()),
+                stats.getNewestBook() == null ? null : bookMapper.toResponse(stats.getNewestBook()),
                 stats.getTopAuthors().stream().map(authorStatMapper::toResponse).toList()
         );
     }
